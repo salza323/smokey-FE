@@ -3,16 +3,11 @@ import axios from 'axios';
 
 import fetchRecipes from '../api/ApiOperations';
 
-import RecipePreviewCard from './RecipePreviewCard';
+import RecipePreviewCard from '../Components/RecipePreviewCard';
 
 function Recipes() {
   const [recipeData, setRecipeData] = useState([]);
   console.log(recipeData);
-
-  //   useEffect(() => {
-  //     setRecipeData(fetchRecipes());
-  //     console.log(recipeData);
-  //   }, []);
 
   const fetchData = () => {
     axios
