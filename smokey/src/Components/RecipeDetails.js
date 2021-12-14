@@ -11,10 +11,6 @@ function RecipeDetails() {
   const ingredients = singleRecipe.recipeIngredients;
   const steps = singleRecipe.recipeSteps;
 
-  console.log(singleRecipe);
-  console.log(ingredients);
-  console.log(steps);
-
   return (
     <div>
       <h1>{singleRecipe.recipe_name}</h1>

@@ -5,7 +5,6 @@ import RecipePreviewCard from '../Components/RecipePreviewCard';
 
 function Recipes() {
   const [recipeData, setRecipeData] = useState([]);
-  console.log(recipeData);
 
   const fetchData = () => {
     axios

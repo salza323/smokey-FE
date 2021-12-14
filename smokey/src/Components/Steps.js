@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Steps(singleStep) {
-  console.log(singleStep);
   return (
     <div>
       <p>Step Number {singleStep.singleStep.step_number}</p>
