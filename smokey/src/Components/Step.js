@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Steps(singleStep) {
+function Step(singleStep) {
   return (
     <div>
       <p>Step Number {singleStep.singleStep.step_number}</p>
@@ -13,4 +13,4 @@ function Steps(singleStep) {
   );
 }
 
-export default Steps;
+export default Step;
