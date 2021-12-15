@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import fetchRecipes from '../api/ApiOperations';
-
 import RecipePreviewCard from '../Components/RecipePreviewCard';
 
 function Recipes() {
   const [recipeData, setRecipeData] = useState([]);
-  console.log(recipeData);
 
   const fetchData = () => {
     axios
@@ -20,7 +17,6 @@ function Recipes() {
 
   useEffect(() => {
     fetchData();
-    console.log(recipeData);
   }, []);
 
   return (

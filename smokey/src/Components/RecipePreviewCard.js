@@ -5,6 +5,8 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import { Link } from 'react-router-dom';
+
 function RecipePreviewCard(singleRecipe) {
   return (
     <Card sx={{ minWidth: 275 }} variant='outlined'>
@@ -19,7 +21,15 @@ function RecipePreviewCard(singleRecipe) {
           Likes: {singleRecipe.singleRecipe.likes} <br />
         </Typography>
         <CardActions>
-          <Button size='small'>See Recipe</Button>
+          <Link to='/recipe-details' state={singleRecipe}>
+            <Button
+              size='small'
+              // href='/recipe-details'
+              // state={singleRecipe.singleRecipe}
+            >
+              <p>Recipe Details</p>
+            </Button>
+          </Link>
         </CardActions>
       </CardContent>
     </Card>
