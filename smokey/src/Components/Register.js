@@ -15,7 +15,6 @@ const initalRegisterValues = {
 
 function Register(props) {
   const [register, setRegister] = useState(initalRegisterValues);
-  const [disabled, setDiasabled] = useState(true);
 
   const navigate = useNavigate();
 
