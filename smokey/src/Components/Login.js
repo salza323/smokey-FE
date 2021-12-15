@@ -29,6 +29,7 @@ function Login() {
       .post('http://localhost:8001/api/auth/login', login)
       .then(function (res) {
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userId', res.data.userId);
         localStorage.setItem('username', login.username);
         navigate('/');
         console.log('Succesful login');
