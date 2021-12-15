@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router';
 
 import Ingredients from './Ingredients';
-import Steps from './Steps';
+import Step from './Step';
 
 function RecipeDetails() {
   const location = useLocation();
@@ -22,7 +22,7 @@ function RecipeDetails() {
       ))}
       <h3>Steps</h3>
       {steps.map((singleStep, idx) => (
-        <Steps key={idx} singleStep={singleStep} />
+        <Step key={idx} singleStep={singleStep} />
       ))}
       <h1>Likes: {singleRecipe.likes}</h1>
     </div>
