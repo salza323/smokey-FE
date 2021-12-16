@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -46,8 +46,6 @@ function CreateRecipe(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('newRecipe', newRecipe);
-    console.log('ingredients', ingredients);
     axios
       .post('http://localhost:8001/api/recipes/create-recipe', newRecipe)
       .then(function () {
@@ -55,13 +53,7 @@ function CreateRecipe(props) {
         console.log('Added a new Recipe!');
       })
       .catch((err) => console.log(err));
-    // setNewRecipe(initialRecipeValues);
-    console.log('final obj', newRecipe);
   };
-
-  useEffect(() => {
-    console.log('useEffect[ingredients]: ', { ingredients });
-  }, [ingredients]);
 
   return (
     <div>

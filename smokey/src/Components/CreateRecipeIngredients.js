@@ -8,7 +8,6 @@ function CreateRecipeIngredients(props) {
   const ingredientChangeHandler = (e, ingredient) => {
     e.persist();
     ingredient[e.target.name] = e.target.value;
-    console.log({ ingredient });
   };
 
   const addIngredient = () => {

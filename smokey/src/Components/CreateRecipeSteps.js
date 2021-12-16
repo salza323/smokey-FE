@@ -4,12 +4,10 @@ import Button from '@mui/material/Button';
 
 function CreateRecipeSteps(props) {
   const { steps, setSteps } = props;
-  console.log('steps in comp', steps);
 
   const stepChangeHandler = (e, step) => {
     e.persist();
     step[e.target.name] = e.target.value;
-    console.log({ step });
   };
 
   const addStep = () => {
