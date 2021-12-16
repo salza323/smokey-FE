@@ -34,13 +34,23 @@ function Login() {
         navigate('/');
         console.log('Succesful login');
       });
+
+    //TODO add catch and set back to initial form value to clear out.
   };
 
   return (
     <Box
       component='form'
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
+        '& .MuiTextField-root': {
+          m: 1,
+          width: '25ch',
+          display: 'flex',
+          flexFlow: 'column no-wrap',
+          margin: 'auto',
+          marginTop: '50px',
+        },
+        border: '2px solid black',
       }}
       noValidate
       autoComplete='off'
@@ -64,7 +74,11 @@ function Login() {
           value={login.password}
           onChange={changeHandler}
         />
-        <Button onClick={submitHandler} variant='outlined'>
+        <Button
+          onClick={submitHandler}
+          variant='outlined'
+          sx={{ marginTop: '50px' }}
+        >
           Login
         </Button>
       </div>

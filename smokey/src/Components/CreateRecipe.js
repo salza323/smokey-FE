@@ -1,55 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Ingredients from './Ingredients';
+
+import CreateRecipeIngredients from './CreateRecipeIngredients';
+import CreateRecipeSteps from './CreateRecipeSteps';
+
+const initialSteps = [
+  {
+    step_number: 0,
+    step_temperature_in_fahrenheit: 0,
+    step_instruction: '',
+  },
+];
+
+const initialIngredients = [
+  {
+    ingredient_name: '',
+    ingredient_quantity: '',
+  },
+];
 
 const initialRecipeValues = {
   recipe_name: '',
   creator_id: window.localStorage.getItem('userId'),
-  ingredients: [],
-  steps: [],
+  ingredients: initialIngredients,
+  steps: initialSteps,
 };
-
 function CreateRecipe(props) {
-  const [newRecipe, setNewrecipe] = useState(initialRecipeValues);
+  const [newRecipe, setNewRecipe] = useState(initialRecipeValues);
+  const [recipe, setRecipe] = useState({});
+  const [ingredients, setIngredients] = useState(newRecipe.ingredients);
+  const [steps, setSteps] = useState(newRecipe.steps);
+  //   const [newIngredients, setNewIngredients] = useState({ initialIngredients });
   console.log(newRecipe);
+  console.log(newRecipe.ingredients);
 
   const navigate = useNavigate();
 
   const changeHandler = (e) => {
     e.persist();
-    setNewrecipe({
-      ...newRecipe,
-      [e.target.name]: e.target.value,
-    });
-    console.log(newRecipe);
-  };
-
-  const stepChange = (e) => {
-    e.persist();
     setNewRecipe({
-      ...newRecipe.ingredients,
+      ...newRecipe,
       [e.target.name]: e.target.value,
     });
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(newRecipe);
-    axios
-      .post('localhost:8001/api/recipes/create-recipe', newRecipe)
-      .then(function () {
-        navigate('/');
-        console.log('Added a new Recipe!');
-      })
-      .catch((err) => console.log(err));
-    setNewrecipe(initialRecipeValues);
+    console.log('newRecipe', recipe);
+    console.log('ingredients', ingredients);
+    // axios
+    //   .post('localhost:8001/api/recipes/create-recipe', newRecipe)
+    //   .then(function () {
+    //     navigate('/');
+    //     console.log('Added a new Recipe!');
+    //   })
+    //   .catch((err) => console.log(err));
+    // setNewRecipe(initialRecipeValues);
+    console.log('final obj', newRecipe);
   };
+
+  useEffect(() => {
+    console.log('useEffect[ingredients]: ', { ingredients });
+  }, [ingredients]);
 
   return (
     <div>
+      <h1> Create A New Recipe</h1>
       <Box
         component='form'
         sx={{
@@ -68,6 +89,11 @@ function CreateRecipe(props) {
             value={newRecipe.recipe_name}
             onChange={changeHandler}
           />
+          <CreateRecipeIngredients
+            ingredients={ingredients}
+            setIngredients={setIngredients}
+          />
+          <CreateRecipeSteps steps={steps} setSteps={setSteps} />
           <Button onClick={submitHandler} variant='outlined'>
             Publish Recipe!
           </Button>

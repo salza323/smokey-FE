@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 function RecipePreviewCard(singleRecipe) {
   return (
-    <Card sx={{ minWidth: 275 }} variant='outlined'>
+    <Card sx={{ width: 275, margin: 'auto' }} variant='outlined'>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
           Recipe Name: {singleRecipe.singleRecipe.recipe_name}

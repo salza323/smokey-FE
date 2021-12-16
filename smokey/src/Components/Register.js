@@ -45,11 +45,20 @@ function Register(props) {
     <Box
       component='form'
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
+        '& .MuiTextField-root': {
+          m: 1,
+          width: '25ch',
+          display: 'flex',
+          flexFlow: 'column no-wrap',
+          margin: 'auto',
+          marginTop: '50px',
+        },
+        border: '2px solid black',
       }}
       noValidate
       autoComplete='off'
     >
+      <h1>Register</h1>
       <div>
         <TextField
           required
@@ -96,7 +105,11 @@ function Register(props) {
           value={register.city_and_state_location}
           onChange={changeHandler}
         />
-        <Button onClick={submitHandler} variant='outlined'>
+        <Button
+          onClick={submitHandler}
+          variant='outlined'
+          sx={{ marginTop: '50px' }}
+        >
           Register
         </Button>
       </div>
