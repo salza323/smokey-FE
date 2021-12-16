@@ -4,7 +4,6 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Ingredients from './Ingredients';
 
 import CreateRecipeIngredients from './CreateRecipeIngredients';
 import CreateRecipeSteps from './CreateRecipeSteps';
@@ -32,12 +31,8 @@ const initialRecipeValues = {
 };
 function CreateRecipe(props) {
   const [newRecipe, setNewRecipe] = useState(initialRecipeValues);
-  const [recipe, setRecipe] = useState({});
   const [ingredients, setIngredients] = useState(newRecipe.ingredients);
   const [steps, setSteps] = useState(newRecipe.steps);
-  //   const [newIngredients, setNewIngredients] = useState({ initialIngredients });
-  console.log(newRecipe);
-  console.log(newRecipe.ingredients);
 
   const navigate = useNavigate();
 
@@ -51,15 +46,15 @@ function CreateRecipe(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('newRecipe', recipe);
+    console.log('newRecipe', newRecipe);
     console.log('ingredients', ingredients);
-    // axios
-    //   .post('localhost:8001/api/recipes/create-recipe', newRecipe)
-    //   .then(function () {
-    //     navigate('/');
-    //     console.log('Added a new Recipe!');
-    //   })
-    //   .catch((err) => console.log(err));
+    axios
+      .post('http://localhost:8001/api/recipes/create-recipe', newRecipe)
+      .then(function () {
+        navigate('/');
+        console.log('Added a new Recipe!');
+      })
+      .catch((err) => console.log(err));
     // setNewRecipe(initialRecipeValues);
     console.log('final obj', newRecipe);
   };
