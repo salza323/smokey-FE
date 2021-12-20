@@ -8,18 +8,7 @@ import { Navigate } from 'react-router';
 
 function Recipes() {
   const [recipeData, setRecipeData] = useState([]);
-  //   const [sortingDropdown, setSortingDropdown] = useState('Recent');
   const [displayFormat, setDisplayFormat] = useState('All');
-
-  //   const sortingDropdownOnChange = (event) => {
-  //     setSortingDropdown(event.target.value);
-
-  //     if (event.target.value === 'Recent') {
-  //       props.fetchPostCommentsByRecent(postID);
-  //     } else {
-  //       props.fetchPostCommentsByPopular(postID);
-  //     }
-  //   };
 
   const selectDisplayFormat = (e) => {
     setDisplayFormat(e.target.value);
@@ -59,18 +48,6 @@ function Recipes() {
     e.preventDefault();
     navigate('/create-recipe');
   };
-
-  // <div className='filter'>
-  //   <label htmlFor='sort'>SORT</label>
-  //   <select
-  //     name='sort'
-  //     value={sortingDropdown}
-  //     onChange={sortingDropdownOnChange}
-  //   >
-  //     <option value='Recent'>Recent</option>
-  //     <option value='Popular'>Popular</option>
-  //   </select>
-  // </div>;
 
   return (
     <div className='recipe-data'>
