@@ -24,12 +24,10 @@ function Register(props) {
       ...register,
       [e.target.name]: e.target.value,
     });
-    console.log(register);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(register);
     axios
       .post('http://localhost:8001/api/auth/register', register)
       .then(function (res) {

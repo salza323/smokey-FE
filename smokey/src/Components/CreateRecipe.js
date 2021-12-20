@@ -38,8 +38,6 @@ function CreateRecipe(props) {
   const [ingredients, setIngredients] = useState(recipe.recipeIngredients);
   const [steps, setSteps] = useState(recipe.recipeSteps);
 
-  console.log(ingredients);
-
   const navigate = useNavigate();
 
   const changeHandler = (e) => {

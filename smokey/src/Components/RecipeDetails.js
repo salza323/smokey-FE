@@ -17,8 +17,6 @@ function RecipeDetails() {
 
   const navigate = useNavigate();
 
-  console.log(singleRecipe);
-
   const deleteHandler = (e) => {
     e.preventDefault();
     axios
