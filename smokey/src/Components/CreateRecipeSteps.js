@@ -34,6 +34,7 @@ function CreateRecipeSteps(props) {
                 label='Step Number'
                 placeholder='Enter A Sequence Number'
                 name='step_number'
+                defaultValue={step.step_number}
                 onChange={(e) => stepChangeHandler(e, step)}
               />
               <TextField
@@ -42,6 +43,7 @@ function CreateRecipeSteps(props) {
                 label='Step Temp'
                 placeholder='Enter A Temp in Fahrenheit'
                 name='step_temperature_in_fahrenheit'
+                defaultValue={step.step_temperature_in_fahrenheit}
                 onChange={(e) => stepChangeHandler(e, step)}
               />
               <TextField
@@ -50,6 +52,7 @@ function CreateRecipeSteps(props) {
                 label='Step Instruction'
                 placeholder='Enter Instruction'
                 name='step_instruction'
+                defaultValue={step.step_instruction}
                 onChange={(e) => stepChangeHandler(e, step)}
               />
             </div>

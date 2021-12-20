@@ -8,6 +8,7 @@ function CreateRecipeIngredients(props) {
   const ingredientChangeHandler = (e, ingredient) => {
     e.persist();
     ingredient[e.target.name] = e.target.value;
+    console.log(ingredient);
   };
 
   const addIngredient = () => {
@@ -33,6 +34,7 @@ function CreateRecipeIngredients(props) {
                 label='Ingredient Name'
                 placeholder='Enter A New Ingredient Name'
                 name='ingredient_name'
+                defaultValue={ingredient?.ingredient_name}
                 onChange={(e) => ingredientChangeHandler(e, ingredient)}
               />
               <TextField
@@ -41,6 +43,7 @@ function CreateRecipeIngredients(props) {
                 label='Ingredient Quantitiy'
                 placeholder='Enter Quantity'
                 name='ingredient_quantity'
+                defaultValue={ingredient?.ingredient_quantity}
                 onChange={(e) => ingredientChangeHandler(e, ingredient)}
               />
             </div>
