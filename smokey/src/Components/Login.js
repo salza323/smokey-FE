@@ -29,17 +29,28 @@ function Login() {
       .post('http://localhost:8001/api/auth/login', login)
       .then(function (res) {
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('userId', res.data.userId);
         localStorage.setItem('username', login.username);
         navigate('/');
         console.log('Succesful login');
       });
+
+    //TODO add catch and set back to initial form value to clear out.
   };
 
   return (
     <Box
       component='form'
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
+        '& .MuiTextField-root': {
+          m: 1,
+          width: '25ch',
+          display: 'flex',
+          flexFlow: 'column no-wrap',
+          margin: 'auto',
+          marginTop: '50px',
+        },
+        border: '2px solid black',
       }}
       noValidate
       autoComplete='off'
@@ -63,7 +74,11 @@ function Login() {
           value={login.password}
           onChange={changeHandler}
         />
-        <Button onClick={submitHandler} variant='outlined'>
+        <Button
+          onClick={submitHandler}
+          variant='outlined'
+          sx={{ marginTop: '50px' }}
+        >
           Login
         </Button>
       </div>
