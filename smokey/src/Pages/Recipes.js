@@ -40,6 +40,7 @@ function Recipes() {
   };
 
   useEffect(() => {
+    getAllRecipesByLikes();
     getAllRecipes();
   }, []);
 

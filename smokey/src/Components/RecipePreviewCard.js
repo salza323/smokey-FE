@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -7,6 +8,14 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 
 function RecipePreviewCard(singleRecipe) {
+  const addLike = (e) => {
+    axios
+      .put(
+        `http://localhost:8001/api/recipes/add-like/${singleRecipe.singleRecipe.recipe_id}`
+      )
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Card sx={{ width: 275, margin: 'auto' }} variant='outlined'>
       <CardContent>
@@ -26,6 +35,7 @@ function RecipePreviewCard(singleRecipe) {
             </Button>
           </Link>
         </CardActions>
+        <Button onClick={addLike}>Like</Button>
       </CardContent>
     </Card>
   );
