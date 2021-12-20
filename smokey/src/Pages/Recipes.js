@@ -4,7 +4,6 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 
 import RecipePreviewCard from '../Components/RecipePreviewCard';
-import { Navigate } from 'react-router';
 
 function Recipes() {
   const [recipeData, setRecipeData] = useState([]);

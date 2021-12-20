@@ -4,7 +4,6 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
 import { Link } from 'react-router-dom';
 
 function RecipePreviewCard(singleRecipe) {
@@ -22,11 +21,7 @@ function RecipePreviewCard(singleRecipe) {
         </Typography>
         <CardActions>
           <Link to='/recipe-details' state={singleRecipe}>
-            <Button
-              size='small'
-              // href='/recipe-details'
-              // state={singleRecipe.singleRecipe}
-            >
+            <Button size='small'>
               <p>Recipe Details</p>
             </Button>
           </Link>

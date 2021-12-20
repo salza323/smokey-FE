@@ -6,6 +6,7 @@ import Register from './Components/Register';
 import Login from './Components/Login';
 import RecipeDetails from './Components/RecipeDetails';
 import CreateRecipe from './Components/CreateRecipe';
+import UpdateRecipe from './Components/UpdateRecipe';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route to path='/login' element={<Login />} />
           <Route to path='/recipe-details' element={<RecipeDetails />} />
           <Route to path='/create-recipe' element={<CreateRecipe />} />
+          <Route to path='/update-recipe' element={<UpdateRecipe />} />
           <Route to path='/' element={<Recipes />} />
         </Routes>
       </Router>
