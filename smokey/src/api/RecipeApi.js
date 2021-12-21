@@ -16,6 +16,22 @@ const RecipeApi = {
 
     return response.data;
   },
+
+  updateRecipe: async (id, recipe) => {
+    const response = await axios.put(
+      `http://localhost:8001/api/recipes/update-recipe/${id}`,
+      recipe
+    );
+    return response.data;
+  },
+
+  createRecipe: async (recipe) => {
+    const response = await axios.post(
+      'http://localhost:8001/api/recipes/create-recipe',
+      recipe
+    );
+    return response.data;
+  },
 };
 
 export default RecipeApi;

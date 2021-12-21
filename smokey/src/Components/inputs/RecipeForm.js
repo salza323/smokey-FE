@@ -4,6 +4,7 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+
 import RecipeApi from '../../api/RecipeApi';
 import IngredientInputs from './IngredientInputs';
 import StepInputs from './StepInputs';
@@ -43,36 +44,26 @@ function CreateRecipe(props) {
     });
   };
 
+  // Will set which function gets called, depending on what props are beign passed in from App
+  const submitHandler = (e) => {
+    e.preventDefault();
+    props.method === 'POST' ? createHandler() : updateHandler();
+    console.log(recipe);
+  };
+
   // If 'PUT' method, will send update request to API
-  const updateRecipe = () => {
-    axios
-      .put(
-        `http://localhost:8001/api/recipes/update-recipe/${recipe.recipe_id}`,
-        recipe
-      )
-      .then(function () {
-        navigate('/');
-        console.log('Updated The Recipe!');
-        // console.log(ingredients);
-      })
-      .catch((err) => console.log(err));
+  const updateHandler = async () => {
+    const data = await RecipeApi.updateRecipe(recipe.recipe_id, recipe);
+    // TODO can do something better with this data?
+    console.log(data);
+    navigate('/');
   };
 
   // If 'POST' method, will send create request to API
-  const createRecipe = () => {
-    axios
-      .post('http://localhost:8001/api/recipes/create-recipe', recipe)
-      .then(function () {
-        navigate('/');
-        console.log('Added a new Recipe!');
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    props.method === 'POST' ? createRecipe() : updateRecipe();
-    console.log(recipe);
+  const createHandler = async () => {
+    const data = await RecipeApi.createRecipe(recipe);
+    console.log(data);
+    navigate('/');
   };
 
   const addIngredient = () => {
