@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
@@ -32,7 +31,7 @@ function RecipeDetails() {
       console.log(data);
       setRecipe(data);
     })();
-  }, []);
+  }, [id]);
 
   return (
     <>

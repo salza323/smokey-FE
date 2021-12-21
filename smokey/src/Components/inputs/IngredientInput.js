@@ -1,20 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 
 function IngredientInput(props) {
   const { ingredient } = props;
-
-  console.log({ ingredient });
 
   const ingredientChangeHandler = (e, ingredient) => {
     e.persist();
     ingredient[e.target.name] = e.target.value;
   };
-
-  useEffect(() => {
-    console.log('useEffect[ingredient]', { ingredient });
-  }, [ingredient]);
 
   return (
     <div key={props.index}>

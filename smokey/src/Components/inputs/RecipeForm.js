@@ -4,9 +4,9 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import RecipeApi from '../api/RecipeApi';
-import IngredientInputs from './inputs/IngredientInputs';
-import StepInputs from './inputs/StepInputs';
+import RecipeApi from '../../api/RecipeApi';
+import IngredientInputs from './IngredientInputs';
+import StepInputs from './StepInputs';
 
 const initialSteps = [
   {
@@ -31,24 +31,9 @@ const initialRecipeValues = {
 };
 
 function CreateRecipe(props) {
-  let { id } = useParams();
-  console.log({ id });
-
-  // const location = useLocation();
-  // console.log(location.state);
-
-  // const [recipe, setRecipe] = useState(
-  //   location.state ? location.state : initialRecipeValues
-  // );
   const [recipe, setRecipe] = useState(initialRecipeValues);
-  // const [ingredients, setIngredients] = useState(recipe.recipeIngredients);
-  // const [steps, setSteps] = useState(recipe.recipeSteps);
-
-  console.log({ recipe });
-
+  let { id } = useParams();
   const navigate = useNavigate();
-
-  console.log({ recipe });
 
   const changeHandler = (e) => {
     e.persist();
@@ -63,13 +48,7 @@ function CreateRecipe(props) {
     axios
       .put(
         `http://localhost:8001/api/recipes/update-recipe/${recipe.recipe_id}`,
-        {
-          ...recipe,
-          // TODO make sure everyone shares the same naming convention
-          // recipeIngredients,
-          // ingredients,
-          // steps,
-        }
+        recipe
       )
       .then(function () {
         navigate('/');
@@ -82,13 +61,7 @@ function CreateRecipe(props) {
   // If 'POST' method, will send create request to API
   const createRecipe = () => {
     axios
-      .post('http://localhost:8001/api/recipes/create-recipe', {
-        ...recipe,
-        // TODO make sure everyone shares the same naming convention
-        // recipeIngredients,
-        // ingredients,
-        // steps,
-      })
+      .post('http://localhost:8001/api/recipes/create-recipe', recipe)
       .then(function () {
         navigate('/');
         console.log('Added a new Recipe!');
@@ -133,7 +106,6 @@ function CreateRecipe(props) {
     if (id) {
       (async () => {
         const data = await RecipeApi.getRecipeById({ id });
-        console.log(data);
         setRecipe(null);
         setRecipe(data);
       })();

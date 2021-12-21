@@ -5,7 +5,6 @@ const RecipeApi = {
     const response = await axios.get(
       `http://localhost:8001/api/recipes/retrieve-recipe/${id}`
     );
-    console.log({ response });
 
     return response.data;
   },

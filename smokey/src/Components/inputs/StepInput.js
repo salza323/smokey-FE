@@ -1,20 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 
 function StepInput(props) {
   const { step } = props;
-
-  console.log({ step });
 
   const stepChangeHandler = (e, step) => {
     e.persist();
     step[e.target.name] = e.target.value;
   };
-
-  useEffect(() => {
-    console.log('useEffect[step]', { step });
-  }, [step]);
 
   return (
     <div key={props.index}>
