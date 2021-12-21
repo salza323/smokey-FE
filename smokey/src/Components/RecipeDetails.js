@@ -10,6 +10,7 @@ import RecipeApi from '../api/RecipeApi';
 function RecipeDetails() {
   let { id } = useParams();
   const [recipe, setRecipe] = useState(null);
+  const currentUser = parseInt(window.localStorage.getItem('userId'));
 
   const navigate = useNavigate();
 
@@ -49,12 +50,18 @@ function RecipeDetails() {
           <Step key={idx} singleStep={singleStep} />
         ))}
         <h1>Likes: {recipe?.likes}</h1>
-        <Link to={`/recipes/${recipe?.recipe_id}/edit`} state={recipe}>
-          <Button size='small'>
-            <p>Update Recipe</p>
-          </Button>
-        </Link>
-        <Button onClick={deleteHandler}>Delete this Recipe</Button>
+        {currentUser === recipe?.user_id ? (
+          <>
+            <Link to={`/recipes/${recipe?.recipe_id}/edit`} state={recipe}>
+              <Button size='small'>
+                <p>Update Recipe</p>
+              </Button>
+            </Link>
+            <Button onClick={deleteHandler}>Delete this Recipe</Button>
+          </>
+        ) : (
+          ''
+        )}
       </div>
     </>
   );

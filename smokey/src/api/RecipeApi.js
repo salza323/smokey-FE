@@ -32,6 +32,13 @@ const RecipeApi = {
     );
     return response.data;
   },
+
+  addLikeToRecipe: async (id) => {
+    const response = await axios.put(
+      `http://localhost:8001/api/recipes/add-like/${id}`
+    );
+    return response.data;
+  },
 };
 
 export default RecipeApi;
