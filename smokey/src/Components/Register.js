@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+
+import UserApi from '..//api/UserApi';
 
 const initalRegisterValues = {
   email: '',
@@ -13,7 +14,7 @@ const initalRegisterValues = {
   city_and_state_location: '',
 };
 
-function Register(props) {
+function Register() {
   const [register, setRegister] = useState(initalRegisterValues);
 
   const navigate = useNavigate();
@@ -26,17 +27,11 @@ function Register(props) {
     });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    axios
-      .post('http://localhost:8001/api/auth/register', register)
-      .then(function (res) {
-        localStorage.setItem('token', res.data.token);
-        navigate('/');
-        console.log('Succesful login');
-      })
-      .catch((err) => console.log(err));
-    setRegister(initalRegisterValues);
+    const data = await UserApi.registerNewUser(register);
+    console.log('Created User: ', data);
+    navigate('/login');
   };
 
   return (
