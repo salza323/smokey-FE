@@ -14,6 +14,11 @@ function App() {
         {' '}
         <Routes>
           {' '}
+          <Route
+            to
+            path='/recipes/:id/edit'
+            element={<CreateRecipe method={'PUT'} />}
+          />
           <Route to path='/register' element={<Register />} />
           <Route to path='/login' element={<Login />} />
           <Route to path='/recipe-details' element={<RecipeDetails />} />

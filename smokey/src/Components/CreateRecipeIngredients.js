@@ -3,7 +3,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 function CreateRecipeIngredients(props) {
-  const { ingredients, setIngredients } = props;
+  const { ingredients, setIngredients, setRecipe } = props;
+
+  console.log({ ingredients });
 
   const ingredientChangeHandler = (e, ingredient) => {
     e.persist();

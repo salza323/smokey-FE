@@ -50,7 +50,7 @@ function RecipeDetails() {
           <Step key={idx} singleStep={singleStep} />
         ))}
         <h1>Likes: {recipe?.likes}</h1>
-        <Link to={'/update-recipe'} state={recipe}>
+        <Link to={`/recipes/${recipe?.recipe_id}/edit`} state={recipe}>
           <Button size='small'>
             <p>Update Recipe</p>
           </Button>
