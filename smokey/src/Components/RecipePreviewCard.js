@@ -29,7 +29,7 @@ function RecipePreviewCard(singleRecipe) {
           Likes: {singleRecipe.singleRecipe.likes} <br />
         </Typography>
         <CardActions>
-          <Link to='/recipe-details' state={singleRecipe}>
+          <Link to={`/recipes/${singleRecipe.singleRecipe.recipe_id}`}>
             <Button size='small'>
               <p>Recipe Details</p>
             </Button>
