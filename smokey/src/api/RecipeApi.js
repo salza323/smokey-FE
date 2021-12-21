@@ -39,6 +39,18 @@ const RecipeApi = {
     );
     return response.data;
   },
+
+  getAllRecipes: async () => {
+    const response = await axios.get(`http://localhost:8001/api/recipes`);
+    return response.data;
+  },
+
+  getAllRecipesByLikes: async () => {
+    const response = await axios.get(
+      `http://localhost:8001/api/recipes/by-likes`
+    );
+    return response.data;
+  },
 };
 
 export default RecipeApi;

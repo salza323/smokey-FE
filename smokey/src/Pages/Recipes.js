@@ -1,46 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Button from '@mui/material/Button';
 
+import RecipeApi from '..//api/RecipeApi';
 import RecipePreviewCard from '../Components/RecipePreviewCard';
 
 function Recipes() {
   const [recipeData, setRecipeData] = useState([]);
   const [displayFormat, setDisplayFormat] = useState('All');
 
+  const navigate = useNavigate();
+
   const selectDisplayFormat = (e) => {
     setDisplayFormat(e.target.value);
 
     if (e.target.value === 'All') {
-      getAllRecipes();
+      getAllRecipesHandler();
     } else {
-      getAllRecipesByLikes();
+      getAllRecipesByLikesHandler();
     }
   };
 
-  const navigate = useNavigate();
-
-  const getAllRecipes = () => {
-    axios
-      .get(`http://localhost:8001/api/recipes`)
-      .then(function (res) {
-        setRecipeData(res.data.allRecipes);
-      })
-      .catch((err) => console.log(err.response));
+  const getAllRecipesHandler = async () => {
+    const data = await RecipeApi.getAllRecipes();
+    setRecipeData(data.allRecipes);
   };
 
-  const getAllRecipesByLikes = () => {
-    axios
-      .get(`http://localhost:8001/api/recipes/by-likes`)
-      .then(function (res) {
-        setRecipeData(res.data.allRecipes);
-      })
-      .catch((err) => console.log(err.response));
+  const getAllRecipesByLikesHandler = async () => {
+    const data = await RecipeApi.getAllRecipesByLikes();
+    setRecipeData(data.allRecipes);
   };
 
+  // Will initially load by id, then can be selected to sort by likes
   useEffect(() => {
-    getAllRecipes();
+    getAllRecipesHandler();
   }, []);
 
   const goToCreateARecipe = (e) => {
@@ -64,9 +57,10 @@ function Recipes() {
         </div>
         <p>All The Recipes</p>
         <Button onClick={goToCreateARecipe}>Post Your Own Recipe!</Button>
-        {recipeData.map((singleRecipe, idx) => (
-          <RecipePreviewCard key={idx} singleRecipe={singleRecipe} />
-        ))}
+        {recipeData &&
+          recipeData.map((singleRecipe, idx) => (
+            <RecipePreviewCard key={idx} singleRecipe={singleRecipe} />
+          ))}
       </div>
     </div>
   );
