@@ -4,12 +4,9 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useLocation } from 'react-router';
-import CreateRecipeIngredients from './CreateRecipeIngredients';
-import CreateRecipeSteps from './CreateRecipeSteps';
 import RecipeApi from '../api/RecipeApi';
-import Ingredients from './Ingredients';
 import IngredientInputs from './inputs/IngredientInputs';
+import StepInputs from './inputs/StepInputs';
 
 const initialSteps = [
   {
@@ -118,6 +115,20 @@ function CreateRecipe(props) {
     });
   };
 
+  const addStep = () => {
+    setRecipe({
+      ...recipe,
+      steps: [
+        ...recipe.steps,
+        {
+          step_number: 0,
+          step_temperature_in_fahrenheit: 0,
+          step_instruction: '',
+        },
+      ],
+    });
+  };
+
   useEffect(() => {
     if (id) {
       (async () => {
@@ -127,7 +138,7 @@ function CreateRecipe(props) {
         setRecipe(data);
       })();
     }
-  }, []);
+  }, [id]);
 
   return (
     <div>
@@ -141,7 +152,7 @@ function CreateRecipe(props) {
         autoComplete='off'
       >
         <div>
-          {/* <TextField
+          <TextField
             required
             id='recipe_name'
             label='Recipe Name'
@@ -149,18 +160,11 @@ function CreateRecipe(props) {
             name='recipe_name'
             value={recipe?.recipe_name}
             onChange={changeHandler}
-          /> */}
+          />
           <IngredientInputs
             ingredients={recipe?.ingredients}
             addIngredient={addIngredient}
           />
-
-          {/* <CreateRecipeSteps
-            steps={recipe?.steps}
-            // setSteps={setSteps}
-            setRecipe={setRecipe}
-          /> */}
-
           <StepInputs steps={recipe?.steps} addStep={addStep} />
           <Button onClick={submitHandler} variant='outlined'>
             {props.method === 'POST' ? 'Publish' : 'Update'} Recipe!

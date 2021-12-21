@@ -36,7 +36,7 @@ function RecipeDetails() {
 
   return (
     <>
-      <Button onClick={goBack}>Back to all Recipes id: {id}</Button>
+      <Button onClick={goBack}>Back to all Recipes</Button>
       <div>
         <h1>{recipe?.recipe_name}</h1>
         <h2>Recipe Published By: {recipe?.username}</h2>
