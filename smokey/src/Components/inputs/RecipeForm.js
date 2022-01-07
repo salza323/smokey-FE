@@ -32,6 +32,8 @@ const initialRecipeValues = {
 
 function CreateRecipe(props) {
   const [recipe, setRecipe] = useState(initialRecipeValues);
+  // console.log(window.localStorage.getItem('userId'));
+  // console.log({ recipe });
   let { id } = useParams();
   const navigate = useNavigate();
 
@@ -43,7 +45,7 @@ function CreateRecipe(props) {
     });
   };
 
-  // Will set which function gets called, depending on what props are beign passed in from App
+  // Will set which function gets called, depending on what props are being passed in from App
   const submitHandler = (e) => {
     e.preventDefault();
     props.method === 'POST' ? createHandler() : updateHandler();
@@ -62,8 +64,11 @@ function CreateRecipe(props) {
   const createHandler = async () => {
     const data = await RecipeApi.createRecipe(recipe);
     console.log(data);
+    setRecipe(initialRecipeValues);
     navigate('/');
   };
+
+  // could also setRecipe with a callback function, instead of taking object, set to prev recipe and another funct that return new value
 
   const addIngredient = () => {
     setRecipe({

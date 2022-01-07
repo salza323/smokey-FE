@@ -4,33 +4,34 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-import UserApi from '..//api/UserApi';
+import UserApi from '../../api/UserApi';
 
-const initialLoginValues = {
+const initalRegisterValues = {
+  email: '',
   username: '',
   password: '',
+  fav_cooker: '',
+  city_and_state_location: '',
 };
 
-function Login() {
-  const [login, setLogin] = useState(initialLoginValues);
+function Register() {
+  const [register, setRegister] = useState(initalRegisterValues);
 
   const navigate = useNavigate();
 
   const changeHandler = (e) => {
     e.persist();
-    setLogin({
-      ...login,
+    setRegister({
+      ...register,
       [e.target.name]: e.target.value,
     });
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const data = await UserApi.loginUser(login);
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('userId', data.userId);
-    localStorage.setItem('username', login.username);
-    navigate('/');
+    const data = await UserApi.registerNewUser(register);
+    console.log('Created User: ', data);
+    navigate('/login');
   };
 
   return (
@@ -50,14 +51,24 @@ function Login() {
       noValidate
       autoComplete='off'
     >
+      <h1>Register</h1>
       <div>
+        <TextField
+          required
+          id='email'
+          label='Email'
+          placeholder='Enter Email'
+          name='email'
+          value={register.email}
+          onChange={changeHandler}
+        />
         <TextField
           required
           id='username'
           label='Username'
           placeholder='Enter Username'
           name='username'
-          value={login.username}
+          value={register.username}
           onChange={changeHandler}
         />
         <TextField
@@ -66,7 +77,25 @@ function Login() {
           label='Password'
           placeholder='Password'
           name='password'
-          value={login.password}
+          value={register.password}
+          onChange={changeHandler}
+        />
+        <TextField
+          required
+          id='favCoooker'
+          label='Favorite Cooker'
+          placeholder='Favorite Cooker'
+          name='fav_cooker'
+          value={register.fav_cooker}
+          onChange={changeHandler}
+        />
+        <TextField
+          required
+          id='cityAndState'
+          label='City And State Location'
+          placeholder='City And State Location'
+          name='city_and_state_location'
+          value={register.city_and_state_location}
           onChange={changeHandler}
         />
         <Button
@@ -74,11 +103,11 @@ function Login() {
           variant='outlined'
           sx={{ marginTop: '50px' }}
         >
-          Login
+          Register
         </Button>
       </div>
     </Box>
   );
 }
 
-export default Login;
+export default Register;

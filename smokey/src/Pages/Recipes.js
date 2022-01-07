@@ -42,26 +42,24 @@ function Recipes() {
   };
 
   return (
-    <div className='recipe-data'>
-      <div>
-        <div className='filter'>
-          <label htmlFor='sort'>SORT</label>
-          <select
-            name='sort'
-            value={displayFormat}
-            onChange={selectDisplayFormat}
-          >
-            <option value='All'>All</option>
-            <option value='Most Popular'>Most Popular</option>
-          </select>
-        </div>
-        <p>All The Recipes</p>
-        <Button onClick={goToCreateARecipe}>Post Your Own Recipe!</Button>
-        {recipeData &&
-          recipeData.map((singleRecipe, idx) => (
-            <RecipePreviewCard key={idx} singleRecipe={singleRecipe} />
-          ))}
+    <div>
+      <div className='filter'>
+        <label htmlFor='sort'>SORT</label>
+        <select
+          name='sort'
+          value={displayFormat}
+          onChange={selectDisplayFormat}
+        >
+          <option value='All'>All</option>
+          <option value='Most Popular'>Most Popular</option>
+        </select>
       </div>
+      <p>All The Recipes</p>
+      <Button onClick={goToCreateARecipe}>Post Your Own Recipe!</Button>
+      {recipeData &&
+        recipeData.map((singleRecipe, idx) => (
+          <RecipePreviewCard key={idx} singleRecipe={singleRecipe} />
+        ))}
     </div>
   );
 }

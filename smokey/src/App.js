@@ -2,8 +2,8 @@ import './App.css';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 
 import Recipes from './Pages/Recipes';
-import Register from './Components/Register';
-import Login from './Components/Login';
+import Register from './Components/inputs/Register';
+import Login from './Components/inputs/Login';
 import RecipeDetails from './Components/RecipeDetails';
 import RecipeForm from './Components/inputs/RecipeForm';
 
