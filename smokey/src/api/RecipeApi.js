@@ -1,9 +1,13 @@
 import axios from 'axios';
 
+import axiosWithAuth from './AxiosAuthorization';
+
+const url = 'http://localhost:8001';
+
 const RecipeApi = {
   getRecipeById: async ({ id }) => {
     const response = await axios.get(
-      `http://localhost:8001/api/recipes/retrieve-recipe/${id}`
+      `${url}/api/recipes/retrieve-recipe/${id}`
     );
     return response.data;
   },
