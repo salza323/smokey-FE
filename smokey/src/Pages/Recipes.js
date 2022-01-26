@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
+import '../Styles/Recipes.css';
+
 import RecipeApi from '..//api/RecipeApi';
 import RecipePreviewCard from '../Components/RecipePreviewCard';
 
@@ -56,10 +58,12 @@ function Recipes() {
       </div>
       <p>All The Recipes</p>
       <Button onClick={goToCreateARecipe}>Post Your Own Recipe!</Button>
-      {recipeData &&
-        recipeData.map((singleRecipe, idx) => (
-          <RecipePreviewCard key={idx} singleRecipe={singleRecipe} />
-        ))}
+      <div className='RecipeCardContainer'>
+        {recipeData &&
+          recipeData.map((singleRecipe, idx) => (
+            <RecipePreviewCard key={idx} singleRecipe={singleRecipe} />
+          ))}
+      </div>
     </div>
   );
 }

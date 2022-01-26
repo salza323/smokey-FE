@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import axiosWithAuth from './AxiosAuthorization';
+// import axiosWithAuth from './AxiosAuthorization';
 
 const url = 'http://localhost:8001';
 
