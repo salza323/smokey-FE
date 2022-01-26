@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+
+import UserApi from '../../api/UserApi';
 
 const initialLoginValues = {
   username: '',
@@ -23,19 +24,13 @@ function Login() {
     });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    axios
-      .post('http://localhost:8001/api/auth/login', login)
-      .then(function (res) {
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('userId', res.data.userId);
-        localStorage.setItem('username', login.username);
-        navigate('/');
-        console.log('Succesful login');
-      });
-
-    //TODO add catch and set back to initial form value to clear out.
+    const data = await UserApi.loginUser(login);
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('userId', data.userId);
+    localStorage.setItem('username', login.username);
+    navigate('/');
   };
 
   return (
@@ -56,6 +51,7 @@ function Login() {
       autoComplete='off'
     >
       <div>
+        <h1>Login</h1>
         <TextField
           required
           id='username'

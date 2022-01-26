@@ -1,47 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Button from '@mui/material/Button';
 
+import '../Styles/Recipes.css';
+
+import RecipeApi from '..//api/RecipeApi';
 import RecipePreviewCard from '../Components/RecipePreviewCard';
-import { Navigate } from 'react-router';
 
 function Recipes() {
   const [recipeData, setRecipeData] = useState([]);
   const [displayFormat, setDisplayFormat] = useState('All');
 
+  const navigate = useNavigate();
+
   const selectDisplayFormat = (e) => {
     setDisplayFormat(e.target.value);
 
     if (e.target.value === 'All') {
-      getAllRecipes();
+      getAllRecipesHandler();
     } else {
-      getAllRecipesByLikes();
+      getAllRecipesByLikesHandler();
     }
   };
 
-  const navigate = useNavigate();
-
-  const getAllRecipes = () => {
-    axios
-      .get(`http://localhost:8001/api/recipes`)
-      .then(function (res) {
-        setRecipeData(res.data.allRecipes);
-      })
-      .catch((err) => console.log(err.response));
+  const getAllRecipesHandler = async () => {
+    const data = await RecipeApi.getAllRecipes();
+    setRecipeData(data.allRecipes);
   };
 
-  const getAllRecipesByLikes = () => {
-    axios
-      .get(`http://localhost:8001/api/recipes/by-likes`)
-      .then(function (res) {
-        setRecipeData(res.data.allRecipes);
-      })
-      .catch((err) => console.log(err.response));
+  const getAllRecipesByLikesHandler = async () => {
+    const data = await RecipeApi.getAllRecipesByLikes();
+    setRecipeData(data.allRecipes);
   };
 
+  // Will initially load by id, then can be selected to sort by likes
   useEffect(() => {
-    getAllRecipes();
+    getAllRecipesHandler();
   }, []);
 
   const goToCreateARecipe = (e) => {
@@ -50,24 +44,25 @@ function Recipes() {
   };
 
   return (
-    <div className='recipe-data'>
-      <div>
-        <div className='filter'>
-          <label htmlFor='sort'>SORT</label>
-          <select
-            name='sort'
-            value={displayFormat}
-            onChange={selectDisplayFormat}
-          >
-            <option value='All'>All</option>
-            <option value='Most Popular'>Most Popular</option>
-          </select>
-        </div>
-        <p>All The Recipes</p>
-        <Button onClick={goToCreateARecipe}>Post Your Own Recipe!</Button>
-        {recipeData.map((singleRecipe, idx) => (
-          <RecipePreviewCard key={idx} singleRecipe={singleRecipe} />
-        ))}
+    <div>
+      <div className='filter'>
+        <label htmlFor='sort'>SORT</label>
+        <select
+          name='sort'
+          value={displayFormat}
+          onChange={selectDisplayFormat}
+        >
+          <option value='All'>All</option>
+          <option value='Most Popular'>Most Popular</option>
+        </select>
+      </div>
+      <p>All The Recipes</p>
+      <Button onClick={goToCreateARecipe}>Post Your Own Recipe!</Button>
+      <div className='RecipeCardContainer'>
+        {recipeData &&
+          recipeData.map((singleRecipe, idx) => (
+            <RecipePreviewCard key={idx} singleRecipe={singleRecipe} />
+          ))}
       </div>
     </div>
   );

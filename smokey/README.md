@@ -1,3 +1,11 @@
+# To run project locally:
+
+## Clone this repository and run the following lines in terminal
+
+### `npm install`
+
+### `npm start`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

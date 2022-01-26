@@ -1,0 +1,10 @@
+.RecipeCardContainer {
+  background-color: aqua;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 20px;
+  border-color: blueviolet;
+  padding: 6rem;
+  margin: 0, auto;
+}

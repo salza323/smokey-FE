@@ -1,36 +1,24 @@
-import React from 'react';
-import { useLocation } from 'react-router';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 import Ingredients from './Ingredients';
 import Step from './Step';
-import axios from 'axios';
+import RecipeApi from '../api/RecipeApi';
 
 function RecipeDetails() {
-  const location = useLocation();
-
-  const { singleRecipe } = location.state;
-  const ingredients = singleRecipe.recipeIngredients;
-  const steps = singleRecipe.recipeSteps;
+  let { id } = useParams();
+  const [recipe, setRecipe] = useState(null);
+  const currentUser = parseInt(window.localStorage.getItem('userId'));
 
   const navigate = useNavigate();
 
-  console.log(singleRecipe);
-
-  const deleteHandler = (e) => {
+  const deleteHandler = async (e) => {
     e.preventDefault();
-    axios
-      .delete(
-        `http://localhost:8001/api/recipes/delete-recipe/${singleRecipe.recipe_id}`
-      )
-      .then(function () {
-        navigate('/');
-        console.log(
-          `Recipe with id ${singleRecipe.recipe_id} has been deleted`
-        );
-      })
-      .catch((err) => console.log(err));
+    const data = await RecipeApi.deleteRecipe({ id });
+    console.log(data);
+    navigate('/');
   };
 
   const goBack = (e) => {
@@ -38,23 +26,42 @@ function RecipeDetails() {
     navigate('/');
   };
 
+  useEffect(() => {
+    (async () => {
+      const data = await RecipeApi.getRecipeById({ id });
+      console.log(data);
+      setRecipe(data);
+    })();
+  }, [id]);
+
   return (
     <>
       <Button onClick={goBack}>Back to all Recipes</Button>
       <div>
-        <h1>{singleRecipe.recipe_name}</h1>
-        <h2>Recipe Published By: {singleRecipe.chef}</h2>
+        <h1>{recipe?.recipe_name}</h1>
+        <h2>Recipe Published By: {recipe?.username}</h2>
         <h3>Ingredients</h3>
 
-        {ingredients.map((singleIngredient, idx) => (
+        {recipe?.ingredients?.map?.((singleIngredient, idx) => (
           <Ingredients key={idx} singleIngredient={singleIngredient} />
         ))}
         <h3>Steps</h3>
-        {steps.map((singleStep, idx) => (
+        {recipe?.steps?.map?.((singleStep, idx) => (
           <Step key={idx} singleStep={singleStep} />
         ))}
-        <h1>Likes: {singleRecipe.likes}</h1>
-        <Button onClick={deleteHandler}>Delete this Recipe</Button>
+        <h1>Likes: {recipe?.likes}</h1>
+        {currentUser === recipe?.user_id ? (
+          <>
+            <Link to={`/recipes/${recipe?.recipe_id}/edit`} state={recipe}>
+              <Button size='small'>
+                <p>Update Recipe</p>
+              </Button>
+            </Link>
+            <Button onClick={deleteHandler}>Delete this Recipe</Button>
+          </>
+        ) : (
+          ''
+        )}
       </div>
     </>
   );
