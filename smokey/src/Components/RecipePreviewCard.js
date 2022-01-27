@@ -30,34 +30,28 @@ function RecipePreviewCard(props) {
       <Card
         sx={{
           width: 275,
-          margin: 'auto',
-          padding: '5px',
+          margin: '20px',
+          padding: '20px',
         }}
         variant='outlined'
       >
         <CardContent className='CardContent'>
-          <Typography sx={{ fontSize: 14 }} color='text.secondary' gutterBottom>
-            Recipe Name: {singleRecipe.recipe_name}
+          <Typography sx={{ fontSize: 35 }} color='text.secondary' gutterBottom>
+            {singleRecipe.recipe_name}
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color='text.secondary'>
-            Recipe Creator: {singleRecipe.chef}
+          <Typography sx={{ mb: 2.5 }} color='text.secondary'>
+            By: {singleRecipe.chef}
           </Typography>
-
-          <Typography>
+          <hr></hr>
+          <div className='CardBottomContainer'>
             <Link to={`/recipes/${singleRecipe.recipe_id}`}>
               <Button size='small'>
                 <p>Recipe Details</p>
               </Button>
             </Link>
-          </Typography>
-          <div className='LikesContainer'>
             <Button onClick={addLike}>
-              <IoMdAdd />
-            </Button>
-
-            <Typography variant='outlined'>
               <IoMdFlame /> {likes} <br />
-            </Typography>
+            </Button>
           </div>
         </CardContent>
       </Card>

@@ -1,16 +1,12 @@
 .CardContent {
-  background-color: rgb(201, 131, 51);
+  /* background-color: white; */
   width: 275;
-  margin: 0, auto;
+  margin: 20px;
+  padding: 20px;
 }
 
-.LikesContainer {
+.CardBottomContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.CardContainer {
-  border: 10px;
-  border-color: blueviolet;
 }
