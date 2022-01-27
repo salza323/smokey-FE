@@ -1,8 +1,9 @@
 .CardContent {
-  /* background-color: white; */
+  /* background-color: b; */
   width: 275;
   margin: 20px;
   padding: 20px;
+  /* font-family: monospace; */
 }
 
 .CardBottomContainer {

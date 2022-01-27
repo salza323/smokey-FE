@@ -22,8 +22,12 @@ function RecipePreviewCard(props) {
   };
 
   useEffect(() => {
-    setLikes(singleRecipe.likes);
-  }, [singleRecipe]);
+    if (singleRecipe.likes == null) {
+      setLikes(0);
+    } else {
+      setLikes(singleRecipe.likes);
+    }
+  }, [singleRecipe, likes]);
 
   return (
     <div className='CardContainer'>
